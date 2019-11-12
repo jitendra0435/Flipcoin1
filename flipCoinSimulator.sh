@@ -1,23 +1,30 @@
 #!/bin/bash -x
-   head=1
+   head=2
+   head1=3
    tail=0
-  count=0
-  count2=0
-  total=10
+   tail1=1
+  headdcount=0
+  tailcount=0
+  numberOfflips=20
   
-  for ((i=1;i<11;i++))
+  for ((i=1;i<$numberOfflips;i++))
    do
-   per=$((RANDOM%2))
+   per=$((RANDOM%4))
     if [ $per -eq  $head ]
-       then
-       head[count1++]=$head
-       else 
-       tail[count2++]=$tail
-      
+    then
+        ((headcount++))       
+    elif [ $per -eq $head1 ]
+    then
+          ((headcount++))
+    elif [ $per -eq $tail1 ]
+    then 
+          ((tailcount++))
+    else
+          ((tailcount++))             
    fi
-  done
-  headpercentage=$(($count1*100/10))
-  echo $headpercentage
-  tailpercentage=$(($count2*100/10))
-  echo $tailpercentage
-  
+ done
+
+  headpercentage=$(($headcount*100/$numberOfflips))
+  tailpercentage=$(($tailcount*100/$numberOfflips))
+  echo "percentage of tail : "$tailpercentage
+  echo "percentage of head : "$headpercentage 
