@@ -1,37 +1,41 @@
-#!/bin/bash -x
-   head=3
-   head1=4
-   head2=5
+ #!/bin/bash -x
+   head=1
    tail=0
-   tail1=1
-   tail2=2
    headdcount=0
    tailcount=0
-  numberOfflips=20
-  for ((i=1;i<$numberOfflips;i++))
-   do
-   per=$((RANDOM%6))
-    if [ $per -eq  $head ]
-    then
-        ((headcount++))       
-    elif [ $per -eq $head1 ]
-    then
-          ((headcount++))
-    elif [ $per -eq $head2 ]
-    then
-          ((headcount++))
-    elif [ $per -eq $tail1 ]
-    then 
-          ((tailcount++))
-    elif [ $per -eq $tail2 ]
-    then
-          ((tailcount++))
-    else
-          ((taicount++))             
-   fi
- done
+   numberOfflips=20
 
-  headpercentage=$(($headcount*100/$numberOfflips))
-  tailpercentage=$(($tailcount*100/$numberOfflips))
-  echo "percentage of tail : "$tailpercentage
-  echo "percentage of head : "$headpercentage 
+    for ((i=1;i<$numberOfflips;i++))
+    do
+     checkRandom=$((RANDOM%2))
+      checkRandom1=$((RANDOM%2))
+       checkRandom2=$((RANDOM%2))
+    if [ $checkRandom -eq  $head ]
+     then
+        ((headcount++))       
+    elif [ $checkRandom -eq $tail ]
+      then
+          ((tailcount++))
+    elif [ $checkRandom1 -eq $head ]
+      then
+          ((headcount++))
+    elif [ $checkRandom1 -eq $tail ]
+      then
+          ((taicount++))          
+    elif [ $checkRandom2 -eq $head ]
+      then
+         ((headcount++))   
+     else
+         ((tailcount++))
+   fi
+   done
+       
+    
+     headpercentage=$(($headcount*100/$numberOfflips))
+     tailpercentage=$(($tailcount*100/$numberOfflips))
+     echo "percentage of tail : "$tailpercentage
+     echo "percentage of head : "$headpercentage 
+ 
+  
+ 
+
