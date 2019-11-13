@@ -1,41 +1,37 @@
- #!/bin/bash -x
-   head=1
-   tail=0
-   headdcount=0
-   tailcount=0
-   numberOfflips=20
+#!/bin/bash -x
+echo "no of coin :coins"
+read coins
+echo "no of time flip coin:noOfFlip"
+read noOfFlip
+head=0
+tail=0
+headCount=0
+tailCount=0
 
-    for ((i=1;i<$numberOfflips;i++))
-    do
-     checkRandom=$((RANDOM%2))
-      checkRandom1=$((RANDOM%2))
-       checkRandom2=$((RANDOM%2))
-    if [ $checkRandom -eq  $head ]
-     then
-        ((headcount++))       
-    elif [ $checkRandom -eq $tail ]
-      then
-          ((tailcount++))
-    elif [ $checkRandom1 -eq $head ]
-      then
-          ((headcount++))
-    elif [ $checkRandom1 -eq $tail ]
-      then
-          ((taicount++))          
-    elif [ $checkRandom2 -eq $head ]
-      then
-         ((headcount++))   
-     else
-         ((tailcount++))
-   fi
-   done
-       
-    
-     headpercentage=$(($headcount*100/$numberOfflips))
-     tailpercentage=$(($tailcount*100/$numberOfflips))
-     echo "percentage of tail : "$tailpercentage
-     echo "percentage of head : "$headpercentage 
- 
-  
- 
+declare -A Coins
+function getCoin()
+{
+
+for (( i=1; i<=$noOfFlip; i++ ))
+do
+str=""
+for (( j=1; j<=$coins; j++ ))
+do
+randomCheck=$(( RANDOM % 2 ))
+if [ $randomCheck -eq 1 ]
+then
+str=$str"H"
+((headCount++))
+else
+str=$str"T"
+((tailCount++))
+fi
+done
+echo final key : $str
+Coins["$str"]=$(( ${Coins["$str"]} + 1 ))
+done
+}
+
+getCoin
+echo "${!Coins[@]} : ${Coins[@]}"
 
